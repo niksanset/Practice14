@@ -16,6 +16,16 @@ body {
 
 <body>
     <h1>All posts</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <select name="name">
+            {% for tag in tag_list %}
+                <option value="{{ tag.pk }}">{{ tag }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Sort">
+    </form>
     <button><p style="font-size: 20px;"><a style="text-decoration: none; color: coral;" href="{% url "create_post_url" %}">Create post</a></p></button>
     <div>
 
@@ -24,6 +34,14 @@ body {
         <button>
     
             <a style="text-decoration: none;color: coral;font-size: 20px;" href="{% url "show_post_url" pk=post.pk %}">Post detail</a>
+        </button>
+        <button>
+    
+            <a style="text-decoration: none;color: coral;font-size: 20px;" href="{% url "delete_post_url" pk=post.pk %}">Delete post</a>
+        </button>
+        <button>
+    
+            <a style="text-decoration: none;color: coral;font-size: 20px;" href="{% url "update_post_url" pk=post.pk %}">Update post</a>
         </button>
         {% endfor %}
     </div>
